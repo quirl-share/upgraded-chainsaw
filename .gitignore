@@ -1,3 +1,7 @@
+.idea
+Debug
+Release
+
 # Prerequisites
 *.d
 
