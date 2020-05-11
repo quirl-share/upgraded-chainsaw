@@ -1,0 +1,21 @@
+message Message {                   // Level 0
+  message Position {                // Level 1
+    message Cartesian {             // Level 2
+      required int64 ival = 1;
+      required bool  booly = 2;
+    }
+  }
+  message Velocity {  // Level 1
+    message Inner {   // Level 2
+      required int32 ival = 1;
+      optional bool  booly = 2;
+    }
+  }
+  message Altitude {  // Level 1
+    message Inner {   // Level 2
+      required int32 ival = 1;
+      optional bool  booly = 2;
+    }
+  }
+
+}
