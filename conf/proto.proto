@@ -1,21 +1,113 @@
-message Message {                   // Level 0
-  message Position {                // Level 1
-    message Cartesian {             // Level 2
-      required int64 ival = 1;
-      required bool  booly = 2;
-    }
-  }
-  message Velocity {  // Level 1
-    message Inner {   // Level 2
-      required int32 ival = 1;
-      optional bool  booly = 2;
-    }
-  }
-  message Altitude {  // Level 1
-    message Inner {   // Level 2
-      required int32 ival = 1;
-      optional bool  booly = 2;
-    }
-  }
+syntax = "proto3";
 
+package av.msdf;
+
+//import "google/protobuf/wrappers.proto";
+//Todo fix import
+message DoubleValue {
+  // The double value.
+  double value = 1;
+}
+
+message BooleanValue {
+  // The double value.
+  bool value = 1;
+}
+
+
+message PositionCartesian {
+    /*required*/ double x = 1;
+    /*required*/ double y = 2;
+    /*required*/ double var_x = 3;
+    /*required*/ double var_y = 4;
+    DoubleValue cov_xy = 5;
+}
+
+message PositionPolar {
+    /*required*/ double rho = 1;
+    /*required*/ double theta = 2;
+}
+
+message PositionWgs84 {
+    /*required*/ double lat = 1;
+    /*required*/ double lon = 2;
+    DoubleValue var_lat = 3;
+    DoubleValue var_lon = 4;
+    DoubleValue cov_latlon = 5;
+}
+
+message Position {
+    PositionCartesian cartesian = 1;
+    PositionPolar polar = 2;
+    PositionWgs84 wgs84 = 3;
+}
+
+message VelocityCartesian {
+    /*required*/ double x = 1;
+    /*required*/ double y = 2;
+    /*required*/ double var_x = 3;
+    /*required*/ double var_y = 4;
+}
+
+message VelocityPolar {
+    /*required*/ double speed = 1;
+    /*required*/ double angle = 2;
+    DoubleValue var_speed = 3;
+    DoubleValue var_angle = 4;
+}
+
+message Velocity {
+    VelocityCartesian cartesian = 1;
+    VelocityPolar polar = 2;
+}
+
+message AccelerationCartesian {
+    /*required*/ double speed = 1;
+    /*required*/ double angle = 2;
+    DoubleValue var_x = 3;
+    DoubleValue var_y = 4;
+}
+
+message Acceleration {
+    AccelerationCartesian cartesian = 1;
+}
+
+message AltitudeFlightLevel {
+    double value = 1;
+    BooleanValue is_qnh_adjusted = 2;
+    BooleanValue is_garbled = 3;
+    BooleanValue is_validated = 4;
+}
+
+message AltitudeWsg84 {
+    double value = 1;
+    DoubleValue accuracy = 2;
+}
+
+message AltitudeCartesian {
+    double value = 1;
+    DoubleValue accuracy = 2;
+}
+
+message Altitude {
+    AltitudeFlightLevel flight_level = 1;
+    AltitudeWsg84 wsg84 = 2;
+    AltitudeCartesian cartesian = 3;
+}
+
+message Rocd {
+    double value = 1;
+    double accuracy = 2;
+}
+
+message Message {
+    Position position = 1;
+    Velocity velocity = 2;
+    Acceleration acceleration = 3;
+    Altitude altitude = 4;
+    Rocd rocd = 5;
+
+}
+message Messages {
+    repeated Message messages = 1;
 }

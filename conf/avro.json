@@ -1,0 +1,266 @@
+
+[{
+  "type": "record",
+  "name": "PositionCartesian",
+  "fields": [{
+    "name": "x",
+    "type": "double"
+  }, {
+    "name": "y",
+    "type": "double"
+  }, {
+    "name": "var_x",
+    "type": "double"
+  }, {
+    "name": "var_y",
+    "type": "double"
+  }, {
+    "name": "cov_xy",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "PositionPolar",
+  "fields": [{
+    "name": "rho",
+    "type": "double"
+  }, {
+    "name": "theta",
+    "type": "double"
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "PositionWgs84",
+  "fields": [{
+    "name": "lat",
+    "type": "double"
+  }, {
+    "name": "lon",
+    "type": "double"
+  }, {
+    "name": "var_lat",
+    "type": ["null", "double"],
+    "default": null
+  }, {
+    "name": "var_lon",
+    "type": ["null", "double"],
+    "default": null
+  }, {
+    "name": "cov_latlon",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "Position",
+  "fields": [{
+    "name": "cartesian",
+    "type": ["null", "PositionCartesian"],
+    "default": null
+  }, {
+    "name": "polar",
+    "type": ["null", "PositionPolar"],
+    "default": null
+  }, {
+    "name": "wgs84",
+    "type": ["null", "PositionWgs84"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "VelocityCartesian",
+  "fields": [{
+    "name": "x",
+    "type": "double"
+  }, {
+    "name": "y",
+    "type": "double"
+  }, {
+    "name": "var_x",
+    "type": ["null", "double"],
+    "default": null
+  }, {
+    "name": "var_y",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "VelocityPolar",
+  "fields": [{
+    "name": "speed",
+    "type": "double"
+  }, {
+    "name": "angle",
+    "type": "double"
+  }, {
+    "name": "var_speed",
+    "type": ["null", "double"],
+    "default": null
+  }, {
+    "name": "var_angle",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "Velocity",
+  "fields": [{
+    "name": "cartesian",
+    "type": ["null", "VelocityCartesian"],
+    "default": null
+  }, {
+    "name": "polar",
+    "type": ["null", "VelocityPolar"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "AccelerationCartesian",
+  "fields": [{
+    "name": "speed",
+    "type": "double"
+  }, {
+    "name": "angle",
+    "type": "double"
+  }, {
+    "name": "var_x",
+    "type": ["null", "double"],
+    "default": null
+  }, {
+    "name": "var_y",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "Acceleration",
+  "fields": [{
+    "name": "cartesian",
+    "type": ["null", "AccelerationCartesian"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "AltitudeFlightLevel",
+  "fields": [{
+    "name": "value",
+    "type": "double"
+  }, {
+    "name": "is_qnh_adjusted",
+    "type": ["null", "boolean"],
+    "default": null
+  }, {
+    "name": "is_garbled",
+    "type": ["null", "boolean"],
+    "default": null
+  }, {
+    "name": "is_validated",
+    "type": ["null", "boolean"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "AltitudeWsg84",
+  "fields": [{
+    "name": "value",
+    "type": "double"
+  }, {
+    "name": "accuracy",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "AltitudeCartesian",
+  "fields": [{
+    "name": "value",
+    "type": "double"
+  }, {
+    "name": "accuracy",
+    "type": ["null", "double"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "Altitude",
+  "fields": [{
+    "name": "wsg84",
+    "type": ["null", "AltitudeWsg84"],
+    "default": null
+  }, {
+    "name": "flight_level",
+    "type": ["null", "AltitudeFlightLevel"],
+    "default": null
+  }, {
+    "name": "cartesian",
+    "type": ["null", "AltitudeCartesian"],
+    "default": null
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "Rocd",
+  "fields": [{
+    "name": "value",
+    "type": "double"
+  }, {
+    "name": "accuracy",
+    "type": "double"
+  }
+  ]
+}, {
+  "type": "record",
+  "name": "Message",
+  "fields": [{
+    "name": "position",
+    "type": [
+      "null",
+      "Position"
+    ],
+    "default": null
+  }, {
+    "name": "velocity",
+    "type": [
+      "null",
+      "Velocity"
+    ],
+    "default": null
+  }, {
+    "name": "acceleration",
+    "type": [
+      "null",
+      "Acceleration"
+    ],
+    "default": null
+  }, {
+    "name": "altitude",
+    "type": [
+      "null",
+      "Altitude"
+    ],
+    "default": null
+  }, {
+    "name": "rocd",
+    "type": [
+      "null",
+      "Rocd"
+    ],
+    "default": null
+  }
+  ]
+}
+]

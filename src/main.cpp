@@ -1,36 +1,22 @@
-#include <string>
-#include <iostream>
 
+#include <filesystem>
 #include "Configuration.h"
-#include "caf/all.hpp"
+#include "actors/Supvervisor.h"
 
+using std::cout;
 using std::endl;
 using std::string;
+namespace fs = std::filesystem;
 
 using namespace std;
 using namespace caf;
 
-behavior texter(event_based_actor* self) {
-    return {
-            [=](const string& text) -> string {
-                aout(self) << text << endl;
-                return "";
-            }
-    };
-}
-
-void hello_world(event_based_actor* self, const actor& buddy) {
-    // send "Hello World!" to our buddy ...
-    self->request(buddy, std::chrono::seconds(10), "Say ");
-    self->request(buddy, std::chrono::seconds(10), "Something!");
-}
+#ifdef CAF_BEGIN_TYPE_ID_BLOCK
+init_global_meta_objects<mixed_case_type_ids>();
+#endif
 
 void caf_main(actor_system& system) {
-    // create a new actor that calls 'mirror()'
-    auto mirror_actor = system.spawn(texter);
-    // create another actor that calls 'hello_world(mirror_actor)';
-    system.spawn(hello_world, mirror_actor);
-    // system will wait until both actors are destroyed before leaving main
+    system.spawn(supervisor);
 }
 
 // creates a main function for us that calls our caf_main
